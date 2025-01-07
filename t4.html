@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOD SNEAK - Future of Footwear</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a0033 0%, #660066 50%, #ff3300 100%);
+            color: white;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #00ffff;
+        }
+
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            background-image: url('/api/placeholder/1920/1080'); /* Main sneaker image */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 500px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        .hero-image {
+            width: 600px;
+            height: auto;
+            transform: translateX(100px);
+            opacity: 0;
+            animation: fadeInRight 1s 0.5s forwards;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff3366, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        
+        }
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+        .category-section {
+            padding: 50px 0;
+        }
+
+        .category-title {
+            padding: 0 50px;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: #00ffff;
+        }
+
+        /* Featured Category - Large Cards */
+         .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 0 50px;
+        }
+
+        .featured-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+            min-height: 500px;
+        }
+
+        .featured-card .image-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .featured-card .image-container img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .featured-card .image-container .hover-image {
+            opacity: 0;
+        }
+
+        .featured-card:hover .image-container .main-image {
+            opacity: 0;
+        }
+
+        .featured-card:hover .image-container .hover-image {
+            opacity: 1;
+        }
+
+
+        /* Scrolling Categories */
+        .scroll-container {
+            width: 100%;
+            overflow-x: auto;
+            padding: 20px 50px;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .scroll-content {
+            display: flex;
+            gap: 20px;
+            min-width: max-content;
+        }
+
+        .scroll-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+            min-width: 300px;
+        }
+
+        .scroll-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .featured-card:hover,
+        .scroll-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .button {
+            background: linear-gradient(45deg, #ff3366, #00ffff);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 50px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h2>MOD SNEAK</h2>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#featured">Featured</a>
+            <a href="#performance">Performance</a>
+            <a href="#lifestyle">Lifestyle</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Futurist-Stride 2040</h1>
+            <p>Embrace tomorrow with the Futurist-Stride 2040. Designed for the forward thinker, this sneaker boasts state-of-the-art features and a bold aesthetic that takes your style light-years ahead.</p>
+            <button class="button" style="margin-top: 20px;">Shop Now</button>
+        </div>
+        <img src= "/image/cimage.png" alt="Futurist-Stride 2040" class="hero-image">
+        <div class="scroll-down">
+            <span>Scroll Down</span>
+        </div>
+    </section>
+
+
+    <!-- Featured Category - Large Cards -->
+
+    <section class="category-section" id="featured">
+        <h2 class="category-title">Featured Collection</h2>
+        <div class="featured-grid">
+            <div class="featured-card">
+                <div class="image-container">
+                    <img src="https://i.pinimg.com/736x/fd/42/dc/fd42dc1cdb597597f5cb5b8b44860b40.jpg" alt="Premium Sneaker" class="main-image">
+                    <img src="https://images.unsplash.com/photo-1597045566677-8cf032ed6634?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Premium Sneaker Alternate View" class="hover-image">
+                </div>
+                <h3 style="margin: 20px 0">New Balance x Bricks & Wood 1906U - Black</h3>
+                <p>The flagship model with cutting-edge technology and supreme comfort.</p>
+                <p style="color: #00ffff; font-size: 1.5rem; margin: 15px 0">$399</p>
+                <button class="button">Add to Cart</button>
+            </div>
+            <div class="featured-card">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Premium Sneaker" class="main-image">
+                    <img src="https://i.pinimg.com/736x/96/2d/c4/962dc44ddc19e4e1233ea86ee7832c25.jpg" class="hover-image">
+                    <!-- <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Premium Sneaker Alternate View" class="hover-image"> -->
+                </div>
+                <h3 style="margin: 20px 0">Quantum Leap Pro</h3>
+                <p>Experience the future of athletic performance with our most advanced model.</p>
+                <p style="color: #00ffff; font-size: 1.5rem; margin: 15px 0">$379</p>
+                <button class="button">Add to Cart</button>
+            </div>
+            <div class="featured-card">
+                <div class="image-container">
+                    <img src="/image/shopping.jpg" alt="Premium Sneaker" class="main-image">
+                    <img src="https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Premium Sneaker Alternate View" class="hover-image">
+                </div>
+                <h3 style="margin: 20px 0">Neo Runner X</h3>
+                <p>Where style meets unprecedented performance and comfort.</p>
+                <p style="color: #00ffff; font-size: 1.5rem; margin: 15px 0">$359</p>
+                <button class="button">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Performance Category - Horizontal Scroll -->
+    <section class="category-section" id="performance">
+        <h2 class="category-title">Performance Series</h2>
+        <div class="scroll-container">
+            <div class="scroll-content">
+                <div class="scroll-card">
+                    <img src="/image/nb.jpg " alt="Performance Sneaker">
+                    <h3 style="margin: 8px 0">New Balance x</h3>
+                    <p>Engineered for speed and agility.</p>
+                    <p style="color: #00ffff; font-size: 1.2rem; margin: 10px 0">$299</p>
+                    <button class="button">Add to Cart</button>
+                </div>
+                <div class="scroll-card">
+                    <img src="/image/410acteva.jpg" alt="Performance Sneaker">
+                    <h3 style="margin: 15px 0">Track Master</h3>
+                    <p>Dominate the track with precision.</p>
+                    <p style="color: #00ffff; font-size: 1.2rem; margin: 10px 0">$279</p>
+                    <button class="button">Add to Cart</button>
+                </div>
+                <div class="scroll-card">
+                    <img src="/api/placeholder/400/300" alt="Performance Sneaker">
+                    <h3 style="margin: 15px 0">Agility Pro</h3>
+                    <p>Maximum control and flexibility.</p>
+                    <p style="color: #00ffff; font-size: 1.2rem; margin: 10px 0">$289</p>
+                    <button class="button">Add to Cart</button>
+                </div>
+                <div class="scroll-card">
+                    <img src="/api/placeholder/400/300" alt="Performance Sneaker">
+                    <h3 style="margin: 15px 0">Energy Boost</h3>
+                    <p>Enhanced energy return technology.</p>
+                    <p style="color: #00ffff; font-size: 1.2rem; margin: 10px 0">$269</p>
+                    <button class="button">Add to Cart</button>
+                </div>
+                <div class="scroll-card">
+                    <img src="/api/placeholder/400/300" alt="Performance Sneaker">
+                    <h3 style="margin: 15px 0">Speed Force</h3>
+                    <p>Built for breaking records.</p>
+                    <p style="color: #00ffff; font-size: 1.2rem; margin: 10px 0">$259</p>
+                    <button class="button">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lifestyle Category - Horizontal Scroll -->
+    <section class="category-section" id="lifestyle">
+        <h2 class="category-title">Lifestyle Collection</h2>
+        <div class="scroll-container">
+            <div class="scroll-content">
+                <div class="scroll-card">
+                    <img src="/api/placeholder/400/300" alt="Lifestyle Sneaker">
+                    <h3 style="margin: 15px 0">Urban Style</h3>
+                    <p>City-ready comfort and style.</p>
+                    <p style="color: #00ffff; font-size: 1.2rem; margin: 10px 0">$249</p>
+                    <button class="button">Add to Cart</button>
+                </div>
+                <div class="scroll-card">
+                    <img src="/api/placeholder/400/300" alt="Lifestyle Sneaker">
+                    <h3 style="margin: 15px 0">Street Flow</h3>
+                    <p>Express your unique style.</p>
+                    <p style="color: #00ffff; font-size: 1.2rem; margin: 10px 0">$239</p>
+                    <button class="button">Add to Cart</button>
+                </div>
+                <div class="scroll-card">
+                    <img src="/api/placeholder/400/300" alt="Lifestyle Sneaker">
+                    <h3 style="margin: 15px 0">Daily Comfort</h3>
+                    <p>All-day comfort meets style.</p>
+                    <p style="color: #00ffff; font-size: 1.2rem; margin: 10px 0">$229</p>
+                    <button class="button">Add to Cart</button>
+                </div>
+                <div class="scroll-card">
+                    <img src="/api/placeholder/400/300" alt="Lifestyle Sneaker">
+                    <h3 style="margin: 15px 0">Metro Flex</h3>
+                    <p>Versatile urban design.</p>
+                    <p style="color: #00ffff; font-size: 1.2rem; margin: 10px 0">$219</p>
+                    <button class="button">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div>
+            <h3>MOD SNEAK</h3>
+            <p>Where Innovation Meets Style</p>
+        </div>
+        <div style="margin-top: 20px;">
+            <a href="#" style="color: white; margin: 0 10px;">Instagram</a>
+            <a href="#" style="color: white; margin: 0 10px;">Twitter</a>
+            <a href="#" style="color: white; margin: 0 10px;">Facebook</a>
+        </div>
+        <p style="margin-top: 20px;">&copy; 2025 MOD SNEAK. All rights reserved.</p>
+    </footer>
+</body>
+</html>
